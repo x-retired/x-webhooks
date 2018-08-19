@@ -14,3 +14,4 @@
 
 # self
 .idea
+logs/*.log
