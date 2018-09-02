@@ -15,3 +15,4 @@
 # self
 .idea
 logs/*.log
+.project
