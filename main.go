@@ -1,15 +1,17 @@
 package main
 
 import (
+	"github.com/xiexianbin/webhooks/cmd"
 	_ "github.com/xiexianbin/webhooks/routers"
+
 	"github.com/astaxie/beego"
-	"github.com/xiexianbin/webhooks/cmds"
+	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-	cmds.RegisterLogger()
+	cmd.RegisterLogger()
 
-	cmds.RunCommand()
+	cmd.RunCommand()
 	beego.Run()
 }
-

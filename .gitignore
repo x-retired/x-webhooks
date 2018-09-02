@@ -16,3 +16,5 @@
 .idea
 logs/*.log
 .project
+
+models/server.go
