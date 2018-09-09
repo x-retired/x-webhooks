@@ -59,7 +59,7 @@ func (u *User) Login(account string, password string) (*User, error) {
 		return User, UserNotExist
 	}
 
-	ok := encrypt.Md5Verify(User.Password, password)
+	ok := utils.Md5Verify(User.Password, password)
 
 	if ok {
 		return User, nil
@@ -71,7 +71,7 @@ func (u *User) Login(account string, password string) (*User, error) {
 // Create a new user.
 func (User *User) Create() error {
 	o := orm.NewOrm()
-	User.Password = encrypt.Md5String(User.Password)
+	User.Password = utils.Md5String(User.Password)
 
 	_, err := o.Insert(User)
 	if err != nil {

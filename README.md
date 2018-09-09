@@ -27,3 +27,17 @@ go build -v -tags "pam" -ldflags "-w"
 
 
 ### 运行
+
+```
+# sync db
+./webhooks orm syncdb webhooks
+
+# init base user
+./webhooks install -username=admin -password=123456 -email=me@xiexianbin.cn
+
+# run
+bee run
+bee run -downdoc=true -gendoc=true
+```
+
+

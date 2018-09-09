@@ -1,27 +1,30 @@
+// @APIVersion 1.0.0
+// @Title webhooks apis
+// @Description webhooks apis
+// @Contact me@xiexianbin.cn
+// @TermsOfServiceUrl https://xiexianbin.cn/
+// @License Apache 2.0
+// @LicenseUrl http://www.apache.org/licenses/LICENSE-2.0.html
 package routers
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/context"
-
 	"github.com/xiexianbin/webhooks/controllers"
-	"github.com/xiexianbin/webhooks/controllers/payload"
+	"github.com/xiexianbin/webhooks/controllers/apis"
+	"github.com/xiexianbin/webhooks/controllers/apis/v1"
+
+	"github.com/astaxie/beego"
 )
 
 func init() {
-	api_ns := beego.NewNamespace("/api",
-		beego.NSCond(func(ctx *context.Context) bool {
-			if ctx.Input.Domain() == "webhooks.xiexianbin.cn" {
-				return true
-			}
-			return false
-		}),
-		beego.NSRouter("/version", &payload.VersionController{}, "*:ShowPayloadVersion"),
-		beego.NSNamespace("v1",
-			beego.NSInclude()),
-	)
-	beego.AddNamespace(api_ns)
-
 	beego.Router("/", &controllers.MainController{})
 
+	ns := beego.NewNamespace("/api",
+		beego.NSRouter("/", &apis.VersionController{}),
+		beego.NSRouter("/version", &apis.VersionController{}),
+		beego.NSNamespace("/v1",
+			beego.NSRouter("/", &apis.VersionController{}),
+			beego.NSRouter("/payload", &v1.PayloadController{}),
+		),
+	)
+	beego.AddNamespace(ns)
 }

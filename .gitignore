@@ -17,4 +17,10 @@
 logs/*.log
 .project
 
+swagger
+
+lastupdate.tmp
+sdrms.sqlite3
+swagger.zip
+
 ./webhooks
