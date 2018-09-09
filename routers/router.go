@@ -16,7 +16,7 @@ func init() {
 			}
 			return false
 		}),
-		beego.NSRouter("/version", &payload.PayloadController{}, "*:show_payload_version"),
+		beego.NSRouter("/version", &payload.VersionController{}, "*:ShowPayloadVersion"),
 		beego.NSNamespace("v1",
 			beego.NSInclude()),
 	)

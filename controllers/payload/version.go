@@ -2,10 +2,10 @@ package payload
 
 import "github.com/astaxie/beego"
 
-type PayloadController struct {
+type VersionController struct {
 	beego.Controller
 }
 
-func (this *PayloadController) show_payload_version() {
+func (this *VersionController) ShowPayloadVersion() {
 	this.Data["content"] = "{version: 1.0.0}"
 }

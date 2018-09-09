@@ -17,4 +17,4 @@
 logs/*.log
 .project
 
-models/server.go
+./webhooks
