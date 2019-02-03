@@ -20,7 +20,6 @@ func init() {
 
 	ns := beego.NewNamespace("/api",
 		beego.NSRouter("/", &apis.VersionController{}),
-		beego.NSRouter("/version", &apis.VersionController{}),
 		beego.NSNamespace("/v1",
 			beego.NSRouter("/", &apis.VersionController{}),
 			beego.NSRouter("/payload", &v1.PayloadController{}),
