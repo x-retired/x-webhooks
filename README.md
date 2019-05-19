@@ -1,5 +1,7 @@
 # webhooks
 
+基于 `begoo` 实现 `webhook` 功能，使用场景如 `Github`/`Gitlab` 某个分支发生 `push` 的时候，自动触发一段自定义脚本。
+
 ## 源码安装使用
 
 
@@ -29,15 +31,16 @@ go build -v -tags "pam" -ldflags "-w"
 ### 运行
 
 ```
-# sync db
-./webhooks orm syncdb webhooks
-
-# init base user
-./webhooks install -username=admin -password=123456 -email=me@xiexianbin.cn
-
 # run
 bee run
 bee run -downdoc=true -gendoc=true
 ```
 
+### 打包
 
+```
+bee pack
+bee pack -be GOOS=linux -be GOARCH=amd64
+```
+
+### 使用

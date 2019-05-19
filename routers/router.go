@@ -9,8 +9,6 @@ package routers
 
 import (
 	"github.com/xiexianbin/webhooks/controllers"
-	"github.com/xiexianbin/webhooks/controllers/apis"
-	"github.com/xiexianbin/webhooks/controllers/apis/v1"
 
 	"github.com/astaxie/beego"
 )
@@ -18,12 +16,9 @@ import (
 func init() {
 	beego.Router("/", &controllers.MainController{})
 
-	ns := beego.NewNamespace("/api",
-		beego.NSRouter("/", &apis.VersionController{}),
-		beego.NSNamespace("/v1",
-			beego.NSRouter("/", &apis.VersionController{}),
-			beego.NSRouter("/payload", &v1.PayloadController{}),
-		),
-	)
-	beego.AddNamespace(ns)
+	// webhooks
+	beego.Router("webhooks/", &controllers.WebhooksController{})
+
+	// version
+	beego.Router("version/", &controllers.VersionController{})
 }

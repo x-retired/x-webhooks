@@ -1,15 +1,21 @@
 package main
 
 import (
-	"github.com/xiexianbin/webhooks/cmd"
-	_ "github.com/xiexianbin/webhooks/initialize"
+	"os"
+
+	"github.com/xiexianbin/webhooks/commands"
 	_ "github.com/xiexianbin/webhooks/routers"
 
 	"github.com/astaxie/beego"
 )
 
 func main() {
-	cmd.RunCommand()
+	if len(os.Args) > 1 && os.Args[1] != "run" {
+		commands.RunCommand()
+	}
+
+	commands.RegisterLogger()
+	// utils.LoadArgs()
 
 	// swagger settings
 	if beego.BConfig.RunMode == "dev" {

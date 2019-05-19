@@ -1,0 +1,12 @@
+---
+webhooks:
+- organization: xiexianbin
+  repository: xiexianbin.github.io
+  branch: master
+  script: xiexianbin.github.io.sh
+  secret: xiexianbin.cn
+- organization: xiexianbin
+  repository: docs.xiexianbin.cn
+  branch: master
+  script: docs.xiexianbin.cn.sh
+  secret: xiexianbin.cn
