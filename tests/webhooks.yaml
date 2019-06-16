@@ -1,7 +1,7 @@
 ---
 smtp:
   username: "webhooks@jcloud.xyz"
-  password: "WRdwrd3e"
+  password: "123"
   host: "smtp.ym.163.com"
   port: 25
   ssl: true

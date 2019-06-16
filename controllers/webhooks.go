@@ -1,15 +1,11 @@
 package controllers
 
 import (
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
-
-	"github.com/xiexianbin/webhooks/utils"
+	"github.com/xiexianbin/webhooks/payload"
+	"strings"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
-	"github.com/google/go-github/github"
 )
 
 type WebhooksController struct {
@@ -21,42 +17,23 @@ func (c *WebhooksController) Get() {
 }
 
 func (c *WebhooksController) Post() {
-	//payload, err := github.ValidatePayload(c.Ctx.Request, c.webhookSecretKey)
-	logs.Info("webhook type: " + github.WebHookType(c.Ctx.Request))
-	logs.Info("X-GitHub-Event : " + c.Ctx.Request.Header.Get("X-GitHub-Event"))
-
-	body, err := ioutil.ReadAll(c.Ctx.Request.Body)
-	if err != nil {
-		fmt.Println(err)
-		return
+	result := map[string]interface{}{
+		"success": false,
 	}
 
-	payload := github.WebHookPayload{}
-	_ = json.Unmarshal(body, &payload)
-
-	repository := payload.GetRepo()
-	fullName := repository.GetFullName()
-
-	logs.Info("repository name: " + repository.GetName())
-	logs.Info("repository full_name: " + fullName)
-	logs.Info("user email: " + *payload.GetPusher().Email)
-
-	path := beego.AppPath + "/" + beego.AppConfig.String("webhooks")  // "/conf/webhooks.yaml"
-	logs.Info("Begin to read yaml file: " + path)
-	conf, err := utils.ReadYaml(path)
-	if err == nil {
-		for _, hook := range conf.WebHooks {
-			_fullName := hook.Organization + "/" + hook.Repository
-			if fullName == _fullName {
-				logs.Info("begin to run : " + hook.Script)
-				// _, _ = utils.RunBash(beego.AppPath + "/conf/scripts/" + hook.Script)
-				_, _ = utils.RunBash(beego.AppPath + "/" + beego.AppConfig.String("scripts") + "/" + hook.Script)
-			}
-		}
+	userAgent := c.Ctx.Request.UserAgent()
+	logs.Info("Client User Agent is", userAgent)
+	if strings.HasPrefix(userAgent, "GitHub-Hookshot") {
+		_, _ = payload.GithubPayload(c.Ctx)
+		result["success"] = true
+		result["message"] = "success"
 	} else {
-		logs.Error("Read file error!")
+		logs.Warn("Un-support User Agent:", userAgent)
+		result["success"] = false
+		result["message"] = "Un-support User Agent"
 	}
 
-	c.Ctx.ResponseWriter.WriteHeader(200)
+	c.Data["json"] = result
+	c.ServeJSON()
 	return
 }

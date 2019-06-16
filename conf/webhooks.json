@@ -1,0 +1,28 @@
+{
+  "webhooks":[
+    {
+      "name":"github.com",
+      "actions":[
+        {
+          "event":"push",
+          "items":[
+            {
+              "organization":"xiexianbin",
+              "repository":"xiexianbin.github.io",
+              "branch":"master",
+              "script":"xiexianbin.github.io.sh",
+              "secret":"xiexianbin.cn"
+            },
+            {
+              "organization":"xiexianbin",
+              "repository":"xiexianbin.github.io",
+              "branch":"master",
+              "script":"xiexianbin.github.io.sh",
+              "secret":"xiexianbin.cn"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

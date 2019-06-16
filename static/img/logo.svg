@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="xiexianbin_logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 150" style="enable-background:new 0 0 150 150;" xml:space="preserve">
+<style type="text/css">
+	.logo{fill:#0084B4;}
+</style>
+    <path class="logo" d="M126.88,0H23.12C10.35,0,0,10.35,0,23.12v103.77C0,139.65,10.35,150,23.12,150h103.77
+	c12.77,0,23.12-10.35,23.12-23.12V23.12C150,10.35,139.65,0,126.88,0z M101.18,114.5L75.87,79.53l-25.3,33.97H38.1l31.63-42.46
+	L41.1,31.5h12.47l22.48,31.05L99.18,31.5h12.47L82.19,71.04l31.46,43.46H101.18z"/>
+</svg>

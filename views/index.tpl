@@ -28,7 +28,7 @@
     }
 
     .logo {
-      background-image: url('/static/img/logo.36x36.png');
+      background-image: url('/static/img/logo.svg');
       background-repeat: no-repeat;
       -webkit-background-size: 100px 100px;
       background-size: 100px 100px;
