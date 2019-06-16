@@ -24,15 +24,14 @@ type Action struct {
 
 // event item
 type Item struct {
-	Branch       string `yaml:"branch"`
-	Repository   string `yaml:"repository"`
-	Organization string `yaml:"organization"`
-	Script       string `yaml:"script"`
-	Secret       string `yaml:"secret"`
+	Branch         string `yaml:"branch"`
+	RepositoryName string `yaml:"repository_name"`
+	Script         string `yaml:"script"`
+	Secret         string `yaml:"secret"`
 }
 
 type Smtp struct {
-	Username     string `yaml:username`
+	Username string `yaml:username`
 	Password string `yaml:password`
 	Host     string `yaml:host`
 	Port     int    `yaml:port`

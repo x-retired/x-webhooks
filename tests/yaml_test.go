@@ -37,8 +37,7 @@ func TestYaml(t *testing.T) {
 				for l, item := range action.Items {
 					t.Log(l)
 					t.Log("Branch: " + item.Branch)
-					t.Log("Organization: " + item.Organization)
-					t.Log("Repository: " + item.Repository)
+					t.Log("Repository: " + item.RepositoryName)
 					t.Log("Script: " + item.Script)
 					t.Log("Secret: " + item.Secret)
 				}

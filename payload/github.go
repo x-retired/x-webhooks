@@ -1,8 +1,11 @@
 package payload
 
 import (
+	"strings"
+
 	"github.com/xiexianbin/webhooks/utils"
 
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
 	"github.com/astaxie/beego/logs"
 	"github.com/google/go-github/github"
@@ -43,7 +46,7 @@ func GithubPayload(ctx *context.Context) (result string, err error) {
 
 func processCommitCommentEvent(event *github.CommitCommentEvent) {
 	logs.Info("CommitCommentEvent")
-	
+
 }
 
 func processCreateEvent(event *github.CreateEvent) {
@@ -56,41 +59,32 @@ func processDeleteEvent(event *github.DeleteEvent) {
 }
 
 func processPushEvent(event *github.PushEvent) {
-	logs.Info(event.GetRef())
-	logs.Info("--")
-	email := event.GetHeadCommit().GetCommitter().GetEmail()
-	logs.Info(email)
+	repositoryName := event.GetRepo().GetFullName()
+	branch := strings.Replace(event.GetRef(), "refs/heads/", "", 1)
 
-	//body, err = ioutil.ReadAll(ctx.Request.Body)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//defer ctx.Request.Body.Close()
-	//
-	//payload := github.WebHookPayload{}
-	//_ = json.Unmarshal(body, &payload)
-	//
-	//repository := payload.GetRepo()
-	//fullName := repository.GetFullName()
-	//
-	//logs.Info("repository name: " + repository.GetName())
-	//logs.Info("repository full_name: " + fullName)
-	//logs.Info("user email: " + *payload.GetPusher().Email)
+	logs.Info("repository name:", repositoryName, "branch:", branch)
 
 	conf, err := utils.ReadYaml("")
 	if err == nil {
-		//for _, hook := range conf.WebHooks {
-		//	_fullName := hook.Organization + "/" + hook.Repository
-		//	if fullName == _fullName {
-		//		logs.Info("begin to run : " + hook.Script)
-		//		// _, _ = utils.RunBash(beego.AppPath + "/conf/scripts/" + hook.Script)
-		//		_, _ = utils.RunBash(beego.AppPath + "/" + beego.AppConfig.String("scripts") + "/" + hook.Script)
-		//	}
-		//}
-		logs.Info(conf)
+		for _, provider := range conf.Webhooks {
+			for _, action := range provider.Actions {
+				if action.Event == "push" {
+					for _, item := range action.Items {
+						if branch == item.Branch && repositoryName == item.RepositoryName {
+							logs.Info("Matching repo:", item.RepositoryName, "branch:", item.Branch, "script:", item.Script)
+							_, _ = utils.RunBash(beego.AppPath + "/" + beego.AppConfig.String("scripts") + "/" + item.Script)
+							email := event.GetHeadCommit().GetCommitter().GetEmail()
+							logs.Info("begin to send to", email)
+							//mailTo := []string{email}
+							//utils.SendMail(mailTo, "go webhooks", "test")
+							return
+						}
+					}
+				}
+			}
+		}
+		logs.Warning("No Matching config. skip.")
 	} else {
 		logs.Error("Read file error!")
 	}
-
 }

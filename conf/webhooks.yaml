@@ -3,21 +3,19 @@ smtp:
   username: "webhooks@jcloud.xyz"
   password: "WRdwrd3e"
   host: "smtp.ym.163.com"
-  port: 25
-  ssl: true
+  port: 994
+  ssl: false
 
 webhooks:
   - name: github.com
     actions:
       - event: push
         items:
-          - organization: xiexianbin
-            repository: xiexianbin.github.io
+          - repository_name: xiexianbin/xiexianbin.github.io
             branch: master
             script: xiexianbin.github.io.sh
             secret: xiexianbin.cn
-          - organization: xiexianbin
-            repository: xiexianbin.github.io
-            branch: master
+          - repository_name: xiexianbin/xiexianbin.github.io
+            branch: v2
             script: xiexianbin.github.io.sh
             secret: xiexianbin.cn
