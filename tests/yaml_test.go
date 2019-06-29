@@ -16,7 +16,7 @@ func TestYaml(t *testing.T) {
 
 	path = "/Users/xiexianbin/work/code/go/src/github.com/xiexianbin/webhooks/tests/webhooks.yaml"
 	t.Log("Begin to read yaml file:", path)
-	conf, err := utils.ReadYaml(path)
+	conf, err := utils.ReadYaml()
 	if err == nil {
 		t.Log(conf)
 		smtp := conf.Smtp

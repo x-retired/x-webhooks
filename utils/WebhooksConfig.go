@@ -1,9 +1,9 @@
 package utils
 
 import (
-	"github.com/astaxie/beego"
 	"os"
 
+	"github.com/astaxie/beego"
 	"gopkg.in/yaml.v2"
 )
 
@@ -39,10 +39,8 @@ type Smtp struct {
 }
 
 // read yaml config
-func ReadYaml(path string) (*WebhooksYaml, error) {
-	if path == "" {
-		path = beego.AppPath + "/" + beego.AppConfig.String("webhooks")
-	}
+func ReadYaml() (*WebhooksYaml, error) {
+	path := beego.AppPath + "/" + beego.AppConfig.String("webhooks")
 
 	conf := &WebhooksYaml{}
 	if f, err := os.Open(path); err != nil {
@@ -52,4 +50,26 @@ func ReadYaml(path string) (*WebhooksYaml, error) {
 	}
 
 	return conf, nil
+}
+
+func GetSmtp() Smtp {
+	port, err := beego.AppConfig.Int("SmtpPort")
+	if err != nil {
+		port = 465
+	}
+	ssl, err := beego.AppConfig.Bool("SmtpSsl")
+	if err != nil {
+		ssl = true
+	}
+	return Smtp{
+		Username: beego.AppConfig.String("SmtpUsername"),
+		Password: beego.AppConfig.String("SmtpPassword"),
+		Host: beego.AppConfig.String("SmtpHost"),
+		Port: port,
+		SSL: ssl,
+	}
+}
+
+func GetDefaultNotifyEmail() []string {
+	return []string{beego.AppConfig.String("DefaultNotifyEmail")}
 }

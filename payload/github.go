@@ -64,7 +64,7 @@ func processPushEvent(event *github.PushEvent) {
 
 	logs.Info("repository name:", repositoryName, "branch:", branch)
 
-	conf, err := utils.ReadYaml("")
+	conf, err := utils.ReadYaml()
 	if err == nil {
 		for _, provider := range conf.Webhooks {
 			for _, action := range provider.Actions {
@@ -72,11 +72,10 @@ func processPushEvent(event *github.PushEvent) {
 					for _, item := range action.Items {
 						if branch == item.Branch && repositoryName == item.RepositoryName {
 							logs.Info("Matching repo:", item.RepositoryName, "branch:", item.Branch, "script:", item.Script)
-							_, _ = utils.RunBash(beego.AppPath + "/" + beego.AppConfig.String("scripts") + "/" + item.Script)
+							go utils.RunBash(beego.AppPath + "/" + beego.AppConfig.String("scripts") + "/" + item.Script)
 							email := event.GetHeadCommit().GetCommitter().GetEmail()
-							logs.Info("begin to send to", email)
-							//mailTo := []string{email}
-							//utils.SendMail(mailTo, "go webhooks", "test")
+							mailTo := []string{email}
+							go utils.SendMail(mailTo, "Webhooks git commit success", event.String())
 							return
 						}
 					}
@@ -84,6 +83,7 @@ func processPushEvent(event *github.PushEvent) {
 			}
 		}
 		logs.Warning("No Matching config. skip.")
+		_ = utils.SendMail(utils.GetDefaultNotifyEmail(), "Webhooks failed", event.String())
 	} else {
 		logs.Error("Read file error!")
 	}
