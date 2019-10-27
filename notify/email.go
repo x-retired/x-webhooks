@@ -1,15 +1,16 @@
-package utils
+package notify
 
 import (
+	"github.com/xiexianbin/webhooks/utils"
 	"gopkg.in/gomail.v2"
 	"net/smtp"
 
 	"github.com/astaxie/beego/logs"
 )
 
-func SendMail(emailTo []string, subject string, body string) error {
+func SendMail(emailTo []string, subject, body string) error {
 	logs.Info("begin to send to", emailTo)
-	conf := GetSmtp()
+	conf := utils.GetSmtp()
 	msg := gomail.NewMessage()
 	msg.SetHeader("From", "XD Game"+"<"+conf.Username+">")
 	msg.SetHeader("To", emailTo...)
@@ -25,9 +26,9 @@ func SendMail(emailTo []string, subject string, body string) error {
 			conf.Username,
 			conf.Password,
 			conf.Host),
-		SSL: false}
+		SSL: conf.SSL}
 	if err := mailer.DialAndSend(msg); err != nil {
-		logs.Warning("Send mail fail:", err.Error())
+		logs.Warning("Send mail fail:", err)
 		return err
 	} else {
 		logs.Info("Send mail to", emailTo, "Success")

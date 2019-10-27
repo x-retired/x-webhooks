@@ -1,16 +1,16 @@
 package test
 
 import (
-"github.com/xiexianbin/webhooks/utils"
-"testing"
+	"github.com/xiexianbin/webhooks/notify"
+	"testing"
 )
 
 func TestEmail(t *testing.T) {
 	mailTo := []string{"me@xiexianbin.cn"}
-	err := utils.SendMail(mailTo, "test", "test")
+	err := notify.SendMail(mailTo, "test", "test")
 	if err == nil {
-		t.Log("success")
+		t.Log("send email success!")
 	} else {
-		t.Log("run bash error!")
+		t.Log("send email error!")
 	}
 }

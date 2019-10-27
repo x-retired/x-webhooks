@@ -18,19 +18,19 @@ func (c *WebhooksController) Get() {
 
 func (c *WebhooksController) Post() {
 	result := map[string]interface{}{
-		"success": false,
+		"result": false,
 	}
 
 	userAgent := c.Ctx.Request.UserAgent()
 	logs.Info("Client User Agent is", userAgent)
 	if strings.HasPrefix(userAgent, "GitHub-Hookshot") {
 		_, _ = payload.GithubPayload(c.Ctx)
-		result["success"] = true
-		result["message"] = "success"
+		result["result"] = true
+		result["message"] = "Success."
 	} else {
 		logs.Warn("Un-support User Agent:", userAgent)
-		result["success"] = false
-		result["message"] = "Un-support User Agent"
+		result["result"] = false
+		result["message"] = "Un-Support User Agent."
 	}
 
 	c.Data["json"] = result

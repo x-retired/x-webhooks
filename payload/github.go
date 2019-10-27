@@ -1,8 +1,12 @@
 package payload
 
 import (
+	"bytes"
+	"encoding/json"
+	"html/template"
 	"strings"
 
+	"github.com/xiexianbin/webhooks/notify"
 	"github.com/xiexianbin/webhooks/utils"
 
 	"github.com/astaxie/beego"
@@ -60,31 +64,71 @@ func processDeleteEvent(event *github.DeleteEvent) {
 
 func processPushEvent(event *github.PushEvent) {
 	repositoryName := event.GetRepo().GetFullName()
+	repositoryUrl := event.GetRepo().GetURL()
 	branch := strings.Replace(event.GetRef(), "refs/heads/", "", 1)
 
 	logs.Info("repository name:", repositoryName, "branch:", branch)
 
 	conf, err := utils.ReadYaml()
-	if err == nil {
-		for _, provider := range conf.Webhooks {
-			for _, action := range provider.Actions {
-				if action.Event == "push" {
-					for _, item := range action.Items {
-						if branch == item.Branch && repositoryName == item.RepositoryName {
-							logs.Info("Matching repo:", item.RepositoryName, "branch:", item.Branch, "script:", item.Script)
-							go utils.RunBash(beego.AppPath + "/" + beego.AppConfig.String("scripts") + "/" + item.Script)
-							email := event.GetHeadCommit().GetCommitter().GetEmail()
-							mailTo := []string{email}
-							go utils.SendMail(mailTo, "Webhooks git commit success", event.String())
-							return
-						}
+	if err != nil {
+		logs.Error("Read file error!")
+		return
+	}
+
+	for _, provider := range conf.Webhooks {
+		for _, action := range provider.Actions {
+			if action.Event != "push" {
+				continue
+			}
+			for _, item := range action.Items {
+				if branch == item.Branch && repositoryName == item.RepositoryName {
+					logs.Info("Matching repo:", item.RepositoryName,
+						"branch:", item.Branch, "script:", item.Script)
+					scriptPath := beego.AppPath + "/" + beego.AppConfig.String("scripts") +
+						"/" + item.Script
+					go utils.RunBash(scriptPath)
+
+					mailTo := []string{event.GetHeadCommit().GetCommitter().GetEmail()}
+					subject := "[Webhooks] Git Push Event Success"
+					_content, _ := json.MarshalIndent(event, "", "  ")
+					templateData := struct {
+						Title    string
+						Result   bool
+						GitUrl   string
+						GitRepo  string
+						Content  string
+					}{
+						Title:   subject,
+						Result:  true,
+						GitUrl:  repositoryUrl,
+						GitRepo: repositoryName,
+						Content: string(_content),
 					}
+
+					templateFileName := beego.AppPath + "/views/email/result.html"
+					sendEmail(mailTo, subject, templateFileName, templateData)
+					return
 				}
 			}
 		}
-		logs.Warning("No Matching config. skip.")
-		_ = utils.SendMail(utils.GetDefaultNotifyEmail(), "Webhooks failed", event.String())
-	} else {
-		logs.Error("Read file error!")
 	}
+
+	logs.Warning("No Matching config. skip.")
+	_ = notify.SendMail(utils.GetDefaultNotifyEmail(), "[Webhooks] failed", event.String())
+}
+
+func sendEmail(emailTo []string, subject, templateFileName string, templateData interface{}) bool {
+	t, err := template.ParseFiles(templateFileName)
+	if err != nil {
+		logs.Warn(err)
+		return false
+	}
+	buf := new(bytes.Buffer)
+	if err = t.Execute(buf, templateData); err != nil {
+		logs.Warn(err)
+		return false
+	}
+
+	notify.SendMail(emailTo, subject, buf.String())
+	return true
 }

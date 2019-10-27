@@ -1,9 +1,9 @@
 ---
 smtp:
-  username: "webhooks@jcloud.xyz"
-  password: "123"
-  host: "smtp.ym.163.com"
-  port: 25
+  username: "robot@80.xyz"
+  password: ""
+  host: "smtp.exmail.qq.com"
+  port: 465
   ssl: true
 
 webhooks:
