@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/astaxie/beego v1.12.0
+	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/go-querystring v1.0.0
 	github.com/gopherjs/gopherjs v0.0.0-20190411002643-bd77b112433e
 	github.com/jtolds/gls v4.20.0+incompatible

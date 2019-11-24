@@ -1,16 +1,16 @@
 package notify
 
 import (
-	"github.com/xiexianbin/webhooks/utils"
 	"gopkg.in/gomail.v2"
 	"net/smtp"
+
+	"github.com/xiexianbin/webhooks/utils"
 
 	"github.com/astaxie/beego/logs"
 )
 
-func SendMail(emailTo []string, subject, body string) error {
+func SendMail(emailTo []string, subject, body string, conf utils.Smtp) error {
 	logs.Info("begin to send to", emailTo)
-	conf := utils.GetSmtp()
 	msg := gomail.NewMessage()
 	msg.SetHeader("From", "XD Game"+"<"+conf.Username+">")
 	msg.SetHeader("To", emailTo...)

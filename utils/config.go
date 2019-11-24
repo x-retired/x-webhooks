@@ -38,20 +38,6 @@ type Smtp struct {
 	SSL      bool   `yaml:ssl`
 }
 
-// read yaml config
-func ReadYaml() (*WebhooksYaml, error) {
-	path := beego.AppPath + "/" + beego.AppConfig.String("webhooks")
-
-	conf := &WebhooksYaml{}
-	if f, err := os.Open(path); err != nil {
-		return nil, err
-	} else {
-		_ = yaml.NewDecoder(f).Decode(conf)
-	}
-
-	return conf, nil
-}
-
 func GetSmtp() Smtp {
 	port, err := beego.AppConfig.Int("SmtpPort")
 	if err != nil {
@@ -64,12 +50,42 @@ func GetSmtp() Smtp {
 	return Smtp{
 		Username: beego.AppConfig.String("SmtpUsername"),
 		Password: beego.AppConfig.String("SmtpPassword"),
-		Host: beego.AppConfig.String("SmtpHost"),
-		Port: port,
-		SSL: ssl,
+		Host:     beego.AppConfig.String("SmtpHost"),
+		Port:     port,
+		SSL:      ssl,
 	}
 }
 
 func GetDefaultNotifyEmail() []string {
 	return []string{beego.AppConfig.String("DefaultNotifyEmail")}
+}
+
+type AliyunOSSConfig struct {
+	Endpoint        string
+	BucketName      string
+	AccessKeyID     string
+	AccessKeySecret string
+}
+
+func GetAliyunOSSConfig() *AliyunOSSConfig {
+	return &AliyunOSSConfig {
+		Endpoint:        beego.AppConfig.String("AliyunOSSEndpoint"),
+		BucketName:      beego.AppConfig.String("AliyunOSSBucketName"),
+		AccessKeyID:     beego.AppConfig.String("AliyunOSSAccessKeyID"),
+		AccessKeySecret: beego.AppConfig.String("AliyunOSSAccessKeySecret"),
+	}
+}
+
+// read yaml config
+func ReadYaml() (*WebhooksYaml, error) {
+	path := beego.AppPath + "/" + beego.AppConfig.String("webhooks")
+
+	conf := &WebhooksYaml{}
+	if f, err := os.Open(path); err != nil {
+		return nil, err
+	} else {
+		_ = yaml.NewDecoder(f).Decode(conf)
+	}
+
+	return conf, nil
 }

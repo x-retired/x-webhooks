@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"github.com/xiexianbin/webhooks/payload"
+	"github.com/xiexianbin/webhooks/drivers/github"
 	"strings"
 
 	"github.com/astaxie/beego"
@@ -24,7 +24,7 @@ func (c *WebhooksController) Post() {
 	userAgent := c.Ctx.Request.UserAgent()
 	logs.Info("Client User Agent is", userAgent)
 	if strings.HasPrefix(userAgent, "GitHub-Hookshot") {
-		_, _ = payload.GithubPayload(c.Ctx)
+		_, _ = github.GithubPayload(c.Ctx)
 		result["result"] = true
 		result["message"] = "Success."
 	} else {
