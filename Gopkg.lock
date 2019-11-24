@@ -2,7 +2,7 @@
 
 
 [[projects]]
-  digest = "1:d7d2e3557e2d8c234d78875adcb28d9d8c44f968fae31f137a10772c96d1e950"
+  digest = "1:6ec43c39d18d18e4880e3b64e1f099608f86734eb0f2d4a7ad7d8b905e90a02f"
   name = "github.com/astaxie/beego"
   packages = [
     ".",
@@ -17,16 +17,16 @@
     "utils",
   ]
   pruneopts = "UT"
-  revision = "bf5c5626ab429e66d88602e1ab1ab5fbf4629a01"
-  version = "v1.9.2"
+  revision = "32ee728078c84c28f2642c70745afc8f6830044d"
+  version = "v1.12.0"
 
 [[projects]]
-  digest = "1:7a72ae19f57d9e2ba2057cac7dc369b32a93ca27cd47589ee000aed8cd5ecfe1"
+  digest = "1:91099c6f78b1e7bdf9ed06eb4cb7f017174293a3689d76b995a06f4c8d64a7f0"
   name = "github.com/google/go-github"
   packages = ["github"]
   pruneopts = "UT"
-  revision = "2680886eeed75abb99132edfa256066dd05d65c9"
-  version = "v25.0.3"
+  revision = "9686ff0746200cf521ce225525b421e13b4eac1a"
+  version = "v28.1.1"
 
 [[projects]]
   digest = "1:a63cff6b5d8b95638bfe300385d93b2a6d9d687734b863da8e09dc834510a690"
@@ -51,6 +51,14 @@
   pruneopts = "UT"
   revision = "b4936e06046bbecbb94cae9c18127ebe510a2cb9"
   version = "v4.20"
+
+[[projects]]
+  branch = "master"
+  digest = "1:44fbfce27cb96b7d20217634af466093485a3e8132820acbe95949cb64e7fc60"
+  name = "github.com/shiena/ansicolor"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "a422bbe96644373c5753384a59d678f7d261ff10"
 
 [[projects]]
   digest = "1:237af0cf68bac89e21af72e6cd6b64f388854895e75f82ad08c6c011e1a8286c"
@@ -78,6 +86,57 @@
   version = "1.6.3"
 
 [[projects]]
+  branch = "master"
+  digest = "1:80451f77cdbbceb6eec3b5124bbd16e3eb8b2ac50cd0a3bfa41c3f562f32e0e9"
+  name = "golang.org/x/crypto"
+  packages = [
+    "acme",
+    "acme/autocert",
+    "cast5",
+    "openpgp",
+    "openpgp/armor",
+    "openpgp/elgamal",
+    "openpgp/errors",
+    "openpgp/packet",
+    "openpgp/s2k",
+  ]
+  pruneopts = "UT"
+  revision = "ac88ee75c92c889b97e05591e9a39b6480c538b3"
+
+[[projects]]
+  branch = "master"
+  digest = "1:d1f7edf951b9cc444358a31de2f4e4c1c5c539ea9c6aca13f5bf92eb1124fc4b"
+  name = "golang.org/x/net"
+  packages = ["idna"]
+  pruneopts = "UT"
+  revision = "fc4aabc6c91483155dade6fbb627cc953a723260"
+
+[[projects]]
+  digest = "1:8d8faad6b12a3a4c819a3f9618cb6ee1fa1cfc33253abeeea8b55336721e3405"
+  name = "golang.org/x/text"
+  packages = [
+    "collate",
+    "collate/build",
+    "internal/colltab",
+    "internal/gen",
+    "internal/language",
+    "internal/language/compact",
+    "internal/tag",
+    "internal/triegen",
+    "internal/ucd",
+    "language",
+    "secure/bidirule",
+    "transform",
+    "unicode/bidi",
+    "unicode/cldr",
+    "unicode/norm",
+    "unicode/rangetable",
+  ]
+  pruneopts = "UT"
+  revision = "342b2e1fbaa52c93f31447ad2c6abc048c63e475"
+  version = "v0.3.2"
+
+[[projects]]
   branch = "v3"
   digest = "1:7388652e2215a3f45d341d58766ed58317971030eb1cbd75f005f96ace8e9196"
   name = "gopkg.in/alexcesaro/quotedprintable.v3"
@@ -94,12 +153,12 @@
   version = "2.0.0"
 
 [[projects]]
-  digest = "1:4d2e5a73dc1500038e504a8d78b986630e3626dc027bc030ba5c75da257cdb96"
+  digest = "1:b75b3deb2bce8bc079e16bb2aecfe01eb80098f5650f9e93e5643ca8b7b73737"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   pruneopts = "UT"
-  revision = "51d6538a90f86fe93ac480b35f37b2be17fef232"
-  version = "v2.2.2"
+  revision = "1f64d6156d11335c3f22d9330b0ad14fc1e789ce"
+  version = "v2.2.7"
 
 [solve-meta]
   analyzer-name = "dep"
