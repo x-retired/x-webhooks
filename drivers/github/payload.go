@@ -6,7 +6,6 @@ import (
 	"html/template"
 	"strings"
 
-	"github.com/xiexianbin/webhooks/notify"
 	"github.com/xiexianbin/webhooks/utils"
 
 	"github.com/astaxie/beego"
@@ -114,7 +113,7 @@ func processPushEvent(event *github.PushEvent) {
 	}
 
 	logs.Warning("No Matching config. skip.")
-	_ = notify.SendMail(utils.GetDefaultNotifyEmail(), "[Webhooks] failed", event.String(), utils.GetSmtp())
+	//_ = notify.SendMail(utils.GetDefaultNotifyEmail(), "[Webhooks] failed", event.String(), utils.GetSmtp())
 }
 
 func sendEmail(emailTo []string, subject, templateFileName string, templateData interface{}) bool {
@@ -129,6 +128,6 @@ func sendEmail(emailTo []string, subject, templateFileName string, templateData 
 		return false
 	}
 
-	notify.SendMail(emailTo, subject, buf.String(), utils.GetSmtp())
+	//notify.SendMail(emailTo, subject, buf.String(), utils.GetSmtp())
 	return true
 }

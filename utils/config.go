@@ -13,13 +13,13 @@ type WebhooksYaml struct {
 }
 
 type Webhook struct {
-	Name    string   `yaml:name`
-	Actions []Action `yaml:actions`
+	Name    string   `yaml:"name"`
+	Actions []Action `yaml:"actions"`
 }
 
 type Action struct {
-	Event string `yaml:event`
-	Items []Item `yaml:items`
+	Event string `yaml:"event"`
+	Items []Item `yaml:"items"`
 }
 
 // event item
@@ -31,11 +31,11 @@ type Item struct {
 }
 
 type Smtp struct {
-	Username string `yaml:username`
-	Password string `yaml:password`
-	Host     string `yaml:host`
-	Port     int    `yaml:port`
-	SSL      bool   `yaml:ssl`
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
+	Host     string `yaml:"host"`
+	Port     int    `yaml:"port"`
+	SSL      bool   `yaml:"ssl"`
 }
 
 func GetSmtp() Smtp {
