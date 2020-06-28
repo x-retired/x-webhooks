@@ -2,12 +2,28 @@
 
 
 [[projects]]
+  digest = "1:573fa46f8d413d4bc3f7cc5e86b2c43cb21559f4fb0a19d9874d228e28fdc07c"
+  name = "github.com/PuerkitoBio/goquery"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2d2796f41742ece03e8086188fa4db16a3a0b458"
+  version = "v1.5.0"
+
+[[projects]]
   digest = "1:88c47c3ce60fa819acad73acd2f5cc60a8035516f19c0112c1a88deb3f7d5419"
   name = "github.com/aliyun/aliyun-oss-go-sdk"
   packages = ["oss"]
   pruneopts = "UT"
   revision = "4ef22f164c610bca021c2b0376fa63015980536a"
   version = "v2.0.4"
+
+[[projects]]
+  digest = "1:24ffaa1636eba8f0cfc7671121d05a9a2040605adb1927a93be88fbc2ea6cfdb"
+  name = "github.com/andybalholm/cascadia"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "b69f6c92dfc187ebfe3914df716c2647a3af0ba0"
+  version = "v1.1.0"
 
 [[projects]]
   digest = "1:6ec43c39d18d18e4880e3b64e1f099608f86734eb0f2d4a7ad7d8b905e90a02f"
@@ -27,6 +43,14 @@
   pruneopts = "UT"
   revision = "32ee728078c84c28f2642c70745afc8f6830044d"
   version = "v1.12.0"
+
+[[projects]]
+  digest = "1:573ca21d3669500ff845bdebee890eb7fc7f0f50c59f2132f2a0c6b03d85086a"
+  name = "github.com/golang/protobuf"
+  packages = ["proto"]
+  pruneopts = "UT"
+  revision = "6c65a5562fc06764971b7c5d05c76c75e84bdbf7"
+  version = "v1.3.2"
 
 [[projects]]
   digest = "1:2e3c336fc7fde5c984d2841455a658a6d626450b1754a854b3b32e7a8f49a07a"
@@ -74,6 +98,28 @@
   version = "v4.20"
 
 [[projects]]
+  digest = "1:b0142f883994390cee3fc0efbee8644c91796eb17d6af1bf8268a0961e6c0f3b"
+  name = "github.com/mmcdole/gofeed"
+  packages = [
+    ".",
+    "atom",
+    "extensions",
+    "internal/shared",
+    "rss",
+  ]
+  pruneopts = "UT"
+  revision = "42010a154d249f5f753dfe03a6390b59671e403e"
+  version = "v1.0.0-beta2"
+
+[[projects]]
+  branch = "master"
+  digest = "1:fb880b85ddcd119242ca65175135771539226ab4f004ddf76b6b1220da231ea2"
+  name = "github.com/mmcdole/goxpp"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "0068e33feabfc0086c7aeb58a9603f91c061c89f"
+
+[[projects]]
   digest = "1:cf31692c14422fa27c83a05292eb5cbe0fb2775972e8f1f8446a71549bd8980b"
   name = "github.com/pkg/errors"
   packages = ["."]
@@ -88,6 +134,26 @@
   packages = ["."]
   pruneopts = "UT"
   revision = "a422bbe96644373c5753384a59d678f7d261ff10"
+
+[[projects]]
+  branch = "master"
+  digest = "1:4c36dd454795088e40d8363217a378a9ade9d51b8050e962e8344a7a590786b1"
+  name = "github.com/shurcooL/githubv4"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "af46314aec7b150c60d4908f4b481aa87f055fc4"
+
+[[projects]]
+  branch = "master"
+  digest = "1:070fd6646e4774dadf633e813a587e152f9386fad277e60a7c6907096a687efe"
+  name = "github.com/shurcooL/graphql"
+  packages = [
+    ".",
+    "ident",
+    "internal/jsonutil",
+  ]
+  pruneopts = "UT"
+  revision = "d48a9a75455f6af30244670bc0c9d0e38e7392b5"
 
 [[projects]]
   digest = "1:237af0cf68bac89e21af72e6cd6b64f388854895e75f82ad08c6c011e1a8286c"
@@ -134,18 +200,46 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:d1f7edf951b9cc444358a31de2f4e4c1c5c539ea9c6aca13f5bf92eb1124fc4b"
+  digest = "1:1dbcf8dc8c53bd6db1991d81f7e8a1ea3ac5f46428bef8bc24429aa716dba76d"
   name = "golang.org/x/net"
-  packages = ["idna"]
+  packages = [
+    "context",
+    "context/ctxhttp",
+    "html",
+    "html/atom",
+    "html/charset",
+    "idna",
+  ]
   pruneopts = "UT"
   revision = "fc4aabc6c91483155dade6fbb627cc953a723260"
 
 [[projects]]
-  digest = "1:8d8faad6b12a3a4c819a3f9618cb6ee1fa1cfc33253abeeea8b55336721e3405"
+  branch = "master"
+  digest = "1:8d1c112fb1679fa097e9a9255a786ee47383fa2549a3da71bcb1334a693ebcfe"
+  name = "golang.org/x/oauth2"
+  packages = [
+    ".",
+    "internal",
+  ]
+  pruneopts = "UT"
+  revision = "5d9234df094ce600ff541158d1491aa10d078a47"
+
+[[projects]]
+  digest = "1:28deae5fe892797ff37a317b5bcda96d11d1c90dadd89f1337651df3bc4c586e"
   name = "golang.org/x/text"
   packages = [
     "collate",
     "collate/build",
+    "encoding",
+    "encoding/charmap",
+    "encoding/htmlindex",
+    "encoding/internal",
+    "encoding/internal/identifier",
+    "encoding/japanese",
+    "encoding/korean",
+    "encoding/simplifiedchinese",
+    "encoding/traditionalchinese",
+    "encoding/unicode",
     "internal/colltab",
     "internal/gen",
     "internal/language",
@@ -153,7 +247,9 @@
     "internal/tag",
     "internal/triegen",
     "internal/ucd",
+    "internal/utf8internal",
     "language",
+    "runes",
     "secure/bidirule",
     "transform",
     "unicode/bidi",
@@ -172,6 +268,22 @@
   packages = ["rate"]
   pruneopts = "UT"
   revision = "555d28b269f0569763d25dbe1a237ae74c6bcc82"
+
+[[projects]]
+  digest = "1:e0a1881f9e0564bebdeac98c75e59f07acdde6ed3a5396e0e613eaad31194866"
+  name = "google.golang.org/appengine"
+  packages = [
+    "internal",
+    "internal/base",
+    "internal/datastore",
+    "internal/log",
+    "internal/remote_api",
+    "internal/urlfetch",
+    "urlfetch",
+  ]
+  pruneopts = "UT"
+  revision = "971852bfffca25b069c31162ae8f247a3dba083b"
+  version = "v1.6.5"
 
 [[projects]]
   branch = "v3"
@@ -221,7 +333,10 @@
     "github.com/astaxie/beego/context",
     "github.com/astaxie/beego/logs",
     "github.com/google/go-github/github",
+    "github.com/mmcdole/gofeed",
+    "github.com/shurcooL/githubv4",
     "github.com/smartystreets/goconvey/convey",
+    "golang.org/x/oauth2",
     "gopkg.in/gomail.v2",
     "gopkg.in/yaml.v2",
     "gotest.tools/assert",
